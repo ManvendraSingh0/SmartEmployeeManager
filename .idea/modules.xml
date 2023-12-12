@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Smart-Employee-Manager-main.iml" filepath="$PROJECT_DIR$/.idea/Smart-Employee-Manager-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Smart-Employee-Manager-main/smartManager.iml" filepath="$PROJECT_DIR$/Smart-Employee-Manager-main/smartManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Smart-Contact-Manager-main/smartManager (1).iml" filepath="$PROJECT_DIR$/Smart-Contact-Manager-main/smartManager (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Smart-Employee-Manager-main/smartManager (2).iml" filepath="$PROJECT_DIR$/Smart-Employee-Manager-main/smartManager (2).iml" />
+    </modules>
+  </component>
+</project>

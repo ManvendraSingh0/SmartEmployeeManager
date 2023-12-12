@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Register</title>
+</head>
+<body>
+<section>
+
+<div class="container">
+<div class="row">
+<div class="col-md-8 offset-md-2">
+<div class="my-card mt-3">
+<!--    aler message-->
+    <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+        <p th:text="${session.message.content}"></p>
+<!--        <th:block th:text="${#session.removeAttribute('message')}"></th:block>-->
+    </div>
+
+   <div class="container text-center">
+       <img style="width:80px" src="" th:src="@{/img/img_2.png}">
+   </div>
+<form  th:action="@{/do_register}" method="post" th:object="${user}">
+
+<h1 class="text-center">Register Here</h1>
+  <div class="form-group">
+<!--    name feild-->
+    <label for="name">Enter name</label>
+    <input type="text" class="form-control"  id="name" aria-describedby="emailHelp" placeholder="Enter name"  name="name" required th:value="${user.name}">
+     <div class="server-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+  </div>
+  <div class="form-group">
+<!--    email feild-->
+    <label for="email">Enter email</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email"  th:value="${user.email}">
+    <div class="server-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+  </div>
+  <div class="form-group">
+    <label for="password">Enter password</label>
+    <input type="password" class="form-control" id="password" aria-describedby="emailHelp" placeholder="Enter password" name="password" th:value="${user.password}">
+    <div  class="server-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+  </div>
+    <div class="form-group">
+        <label for="password">Role</label>
+        <input type="text" class="form-control" id="role" aria-describedby="emailHelp" placeholder="Enter ROLE_ADMIN/USER/MEMBER" name="role" th:value="${user.role}">
+        <div  class="server-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    </div>
+  <div class="form-group">
+    <label for="about">About</label>
+    <textarea class="form-control" id="about" rows="3" name="about" th:value="${user.about}"></textarea>
+    <div class="server-error" th:if="${#fields.hasErrors('about')}" th:errors="*{about}"></div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="reset" class="btn btn-warning">Reset</button>
+</form>
+</div>
+   <br> <a th:href="@{/Admin/dashboard}"><button class=" btn btn-lg bg-primary text-white">Bact to Admin page</button></a>
+</div>
+</div>
+</div>
+</section>
+</body>
+</html>

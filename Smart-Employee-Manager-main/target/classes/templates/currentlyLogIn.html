@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>247Software Teams</title>
+</head>
+<body>
+<section class="banner d-flex justify-content-center align-items-center">
+
+    <div th:if="${userLog}" class="text-center container" style="width:100%; height:100%">
+        <h1>Currently LogIn</h1>
+        <table class="table table-dark">
+            <thead>
+            <tr>
+
+                <th scope="col">Email</th>
+                <th scope="col">Log In Time</th>
+<!--                <th scope="col">LogOut Time</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="LogUser: ${userLog}">
+
+                <td>
+                    <a ><span th:text="${LogUser.username}"></span></a>
+                </td>
+                <td th:text="${LogUser.loginTime}"></td>
+<!--                <td th:text="${LogUser.logoutTime}"></td>-->
+            </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/Admin/dashboard}"><button class=" btn btn-lg bg-primary text-white">Bact to Admin page</button></a>
+
+        <!--        <nav aria-label="Page navigation example" style="position:fixed; bottom:5px" th:if="${user_c}">-->
+        <!--            <ul class="pagination">-->
+        <!--                <li class="page-item" th:if="${current_page+1!=1}">-->
+        <!--                    <a class="page-link" href="#" th:href="@{'/user/all_contacts/'+${current_page-1}}">Previous</a>-->
+        <!--                </li>-->
+        <!--                <li th:classappend="${current_page==i-1?'active':''}" th:each="i : ${#numbers.sequence( 1,total_pages)}"-->
+        <!--                    class="page-item">-->
+        <!--                    <a class="page-link" href="#" th:href="@{'/user/all_contacts/'+${i-1}}"><span th:text="${i}"></span></a>-->
+        <!--                </li>-->
+        <!--                <li class="page-item" th:if="${current_page+1!=total_pages}">-->
+        <!--                    <a class="page-link" href="#" th:href="@{'/user/all_contacts/'+${current_page+1}}">Next</a>-->
+        <!--                </li>-->
+        <!--            </ul>-->
+        <!--        </nav>-->
+        <!--        <div class="container text-right">-->
+        <!--            <form th:action="@{/user/all_contacts/0}" method="get" class="form-inline my-2 my-lg-0">-->
+        <!--                <input type="text" name="keyword" class="form-control mr-sm-2" placeholder="OverAll Search" th:value="${keyword}">-->
+        <!--                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>-->
+        <!--            </form>-->
+        <!--        </div>-->
+    </div>
+    <!--    <div th:unless="${user_c}"> no data available</div>-->
+</section>
+
+</body>
+</html>

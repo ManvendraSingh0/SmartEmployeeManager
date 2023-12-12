@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="/normal/base::Layout(~{::section})">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<section class="banner d-flex justify-content-center align-items-center">
+
+    <div th:if="${user_c}" class="text-center container" style="width:100%; height:100%">
+
+        <div class="search-container my-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="checkbox-group">
+                        <label for="search-by-firstName">Search by First Name:</label>
+                        <input type="checkbox" id="search-by-firstName" value="Name">
+                        <label for="search-by-lastName">Search by Second Name:</label>
+                        <input type="checkbox" id="search-by-lastName" value="SecondName">
+                        <label for ="search-by-email">Search by Email:</label>
+                        <input type="checkbox" id="search-by-email" value="email">
+                    </div>
+                </div>
+            </div>
+            <input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search" style="display: none;">
+            <div class="search-result">
+            </div>
+        </div>
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th scope="col">Employee ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Work</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${user_c}">
+                <th th:text="'247Soft@'+${user.cid}"></th>
+                <td>
+                    <img th:if="${user.image}" class="contact_profile" th:src="@{'/img/'+${user.image}}" />
+                    <span th:text="${user.name} "></span><span th:text="${user.secondName}"></span>
+                </td>
+                <td>
+                    <a th:href="@{'/user/'+${user.cid}}"><span th:text="${user.email}"></span></a>
+                </td>
+                <td th:text="${user.phone}"></td>
+                <td th:text="${user.work}"></td>
+                <td style="display: flex">
+                    <form th:action="@{/user/update}" method="post">
+                        <input type="hidden" th:value="${user.cid}" name="hidden" />
+                        <button type="submit" class="btn btn-secondary">
+                            <span style="font-size: 18px;">&#9998;</span>
+                        </button>
+                    </form>
+                    <form th:action="@{/user/delete}" method="post">
+                        <input type="hidden" th:value="${user.cid}" name="hidden" />
+                        <button type="submit" class="btn btn-danger">
+                            <span style="font-size: 18px;">&#128465;</span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example" style="position:fixed; bottom:15px" th:if="${user_c}">
+
+            <ul class="pagination" >
+                <li class="page-item" th:if="${current_page+1!=1}">
+                    <a class="page-link" href="#" th:href="@{'/user/all_contacts/'+${current_page-1}}">Previous</a>
+                </li>
+                <li th:classappend="${current_page==i-1?'active':''}" th:each="i : ${#numbers.sequence( 1,total_pages)}"
+                    class="page-item">
+                    <a class="page-link" href="#" th:href="@{'/user/all_contacts/'+${i-1}}"><span th:text="${i}"></span></a>
+                </li>
+                <li class="page-item" th:if="${current_page+1!=total_pages}">
+                    <a class="page-link" href="#" th:href="@{'/user/all_contacts/'+${current_page+1}}">Next</a>
+                </li>
+
+            </ul>
+        </nav>
+        <div class="container text-right">
+            <form th:action="@{/user/all_contacts/0}" method="get" class="form-inline my-2 my-lg-0">
+                <input type="text" name="keyword" class="form-control mr-sm-2" placeholder="OverAll Search" th:value="${keyword}">
+                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+            </form>
+        </div>
+    </div>
+    <div th:unless="${user_c}"> no data available</div>
+</section>
+</body>
+</html>
